@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Your Expenses</title>
+</head>
+<body>
+    <h2>Saved Expenses</h2>
+    <a href="/"><button>Back</button></a>
+    <ul>
+        {% for expense in expenses %}
+        <li>
+            <strong>{{ expense.date }}</strong> - ${{ expense.amount }} ({{ expense.category }})
+            {% if expense.description %} - {{ expense.description }}{% endif %}
+
+            <form action="/delete_expense/{{ expense.id }}" method="post" style="display:inline;">
+                <button type="submit">Delete</button>
+            </form>
+        </li>
+        {% endfor %}
+    </ul>
+</body>
+</html>

@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Add Expense</title>
+</head>
+<body>
+    <h2>Add a New Expense</h2>
+    <form id="expenseForm">
+        <label>Date:</label>
+        <input type="date" name="date" required><br><br>
+
+        <label>Amount:</label>
+        <input type="number" step="0.01" name="amount" required><br><br>
+
+        <label>Category:</label>
+        <input type="text" name="category" required><br><br>
+
+        <label>Description:</label>
+        <input type="text" name="description"><br><br>
+
+        <button type="submit">Submit</button>
+    </form>
+
+    <p id="response"></p>
+    <a href="/"><button>Back</button></a>
+
+    <script>
+    document.getElementById("expenseForm").addEventListener("submit", function(e) {
+        e.preventDefault();
+        const form = e.target;
+        const data = {
+            date: form.date.value,
+            amount: parseFloat(form.amount.value),
+            category: form.category.value,
+            description: form.description.value
+        };
+
+        fetch("/add_expense", {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify(data)
+        })
+        .then(res => res.json())
+        .then(json => {
+            document.getElementById("response").innerText = "Expense saved!";
+            form.reset();
+        })
+        .catch(() => {
+            document.getElementById("response").innerText = "Error saving expense.";
+        });
+    });
+    </script>
+</body>
+</html>
