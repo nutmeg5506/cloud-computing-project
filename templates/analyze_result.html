@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Analyze Expenses</title>
+    <meta charset="UTF-8">
+</head>
+<body>
+
+    <h1>Expense Analysis</h1>
+
+    {% if plot_url %}
+        <img src="data:image/png;base64,{{ plot_url }}" alt="Expense Chart">
+    {% else %}
+        <p>No data available to display.</p>
+    {% endif %}
+
+    <a href="/analyze"><button>Back</button></a>
+    <a href="/"><button>Back to Home</button></a>
+
+</body>
+</html>
